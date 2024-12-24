@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="main">
+      <form>
+        <h1>Mortgage Calculator</h1>
+        <button>Clear All</button>
+
+        <label htmlFor="mortgageAmount" className="label-on-top">
+          Mortgage Amount
+          <input type="number" id="mortgageAmount" />
+        </label>
+        <div className="flex-horizontal">
+          <label htmlFor="mortgageTerm" className="label-on-top">
+            Mortgage Term
+            <input type="number" id="mortgageTerm" />
+          </label>
+          <label htmlFor="interestRate" className="label-on-top">
+            Interest Rate
+            <input type="number" id="interestRate" />
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>Mortgage Type </legend>
+          <label htmlFor="repayment">
+            <input type="radio" name="mortgageType" id="repayment" />
+            Repayment
+          </label>
+          <label htmlFor="interest-only">
+            <input type="radio" name="mortgageType" id="interest-only" />
+            Interest Only
+          </label>
+        </fieldset>
+      </form>
+      <div className="output-container">
+        <h2>Results</h2>
+        <div className="output">
+          Your results Your results are shown below based on the information you
+          provided. To adjust the results, edit the form and click “calculate
+          repayments” again. Your monthly repayments Total you'll repay over the
+          term
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

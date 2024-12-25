@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import './App.css';
+import CompletedResults from './components/CompletedResults';
+import IncompleteResults from './components/IncompleteResults';
 
 function App() {
+  const [monthlyRepayment, setMonthlyRepayment] = useState(0);
+
   return (
     <div className="main">
       <form>
-        <h1>Mortgage Calculator</h1>
-        <button>Clear All</button>
-
+        <div className="title-and-button">
+          <h1>Mortgage Calculator</h1>
+          <button className="clear-button">Clear All</button>
+        </div>
         <label htmlFor="mortgageAmount" className="label-on-top">
           Mortgage Amount
           <input type="number" id="mortgageAmount" />
@@ -34,15 +39,16 @@ function App() {
             Interest Only
           </label>
         </fieldset>
+        <button className="submit-button">
+          <img src="./public/assets/images/icon-calculator" />
+          Calculate Repayments
+        </button>
       </form>
       <div className="output-container">
-        <h2>Results</h2>
-        <div className="output">
-          Your results Your results are shown below based on the information you
-          provided. To adjust the results, edit the form and click “calculate
-          repayments” again. Your monthly repayments Total you'll repay over the
-          term
-        </div>
+        <IncompleteResults />
+        <CompletedResults
+          monthlyRepayment={monthlyRepayment}
+        ></CompletedResults>
       </div>
     </div>
   );

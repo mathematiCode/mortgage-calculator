@@ -5,6 +5,7 @@
 
   /* color-scheme: light ; */
   background-color: var(--secondary-100);
+  color: var(--secondary-900);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

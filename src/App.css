@@ -28,12 +28,22 @@ form > * {
   width: 100%;
 }
 
+.clear-button {
+  background-color: transparent;
+  border: none;
+  color: gray;
+  text-decoration: underline;
+}
+
 input[type='number'] {
   font-size: 1.3rem;
+  padding-block: 8px;
+  font-weight: 600;
 }
 
 h1 {
   margin: 0px;
+  font-size: 1.4rem;
 }
 
 .label-on-top {
@@ -49,6 +59,11 @@ h1 {
 
 .flex-horizontal > * {
   width: 48%;
+}
+
+.title-and-button {
+  display: flex;
+  justify-content: space-between;
 }
 
 fieldset {
@@ -72,12 +87,22 @@ fieldset > label {
   background-color: var(--lime-100);
 }
 
+.submit-button {
+  background-color: var(--lime-500);
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 50px;
+  padding: 8px;
+  padding-inline: 20px;
+  width: fit-content;
+}
+
 .output-container {
   background-color: var(--secondary-900);
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding: 15px;
+  padding: 35px;
   border-radius: 20px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 70px;
@@ -86,6 +111,18 @@ fieldset > label {
   color: var(--white);
 }
 
-.output-container > * {
-  /* width: 100%; */
+h3 {
+  font-size: 0.9rem;
+}
+
+.monthly-repayment {
+  color: var(--lime-500);
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+.total-repayment {
+  color: var(--white);
+  font-weight: 800;
+  font-size: 1.5rem;
 }

@@ -34,21 +34,19 @@ function App() {
             <input type="radio" name="mortgageType" id="repayment" />
             Repayment
           </label>
-          <label htmlFor="interest-only">
+          <label htmlFor="interest-only" className="selected-mortgage-type">
             <input type="radio" name="mortgageType" id="interest-only" />
             Interest Only
           </label>
         </fieldset>
         <button className="submit-button">
-          <img src="./public/assets/images/icon-calculator" />
+          <img src="./assets/images/icon-calculator.svg" />
           Calculate Repayments
         </button>
       </form>
       <div className="output-container">
         <IncompleteResults />
-        <CompletedResults
-          monthlyRepayment={monthlyRepayment}
-        ></CompletedResults>
+        {/* <CompletedResults monthlyRepayment={monthlyRepayment} /> */}
       </div>
     </div>
   );

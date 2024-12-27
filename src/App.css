@@ -8,7 +8,7 @@
 
 .main {
   background: white;
-  border-radius: 20px;
+  border-radius: 30px;
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 20px;
@@ -33,6 +33,12 @@ form > * {
   border: none;
   color: gray;
   text-decoration: underline;
+}
+
+button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 input[type='number'] {
@@ -85,6 +91,8 @@ fieldset > label {
 
 .selected-mortgage-type {
   background-color: var(--lime-100);
+  accent-color: var(--lime-500);
+  border: solid var(--lime-500) 2px;
 }
 
 .submit-button {
@@ -103,7 +111,7 @@ fieldset > label {
   flex-direction: column;
   align-items: start;
   padding: 35px;
-  border-radius: 20px;
+  border-radius: 30px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 70px;
   width: 100%;

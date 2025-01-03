@@ -33,6 +33,12 @@ form > * {
   border: none;
   color: gray;
   text-decoration: underline;
+  font-weight: 600;
+}
+
+.clear-button:hover {
+  color: rgb(49, 48, 48);
+  font-weight: 700;
 }
 
 button {
@@ -95,7 +101,7 @@ fieldset {
   border: solid var(--lime-500) 2px;
 }
 
-mortgage-type[data='selected'] {
+.mortgage-type[data-selected='true'] {
   background-color: var(--lime-100);
   accent-color: var(--lime-500);
   border: solid var(--lime-500) 2px;

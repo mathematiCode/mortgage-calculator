@@ -92,7 +92,11 @@ function App() {
 
         <fieldset>
           <legend>Mortgage Type </legend>
-          <label htmlFor="repayment" className="mortgage-type">
+          <label
+            htmlFor="repayment"
+            className="mortgage-type"
+            data-selected={mortgageType === 'repayment'}
+          >
             <input
               type="radio"
               name="mortgageType"
@@ -103,7 +107,11 @@ function App() {
             />
             Repayment
           </label>
-          <label htmlFor="interest-only" className="mortgage-type">
+          <label
+            htmlFor="interest-only"
+            className="mortgage-type"
+            data-selected={mortgageType === 'interest-only'}
+          >
             <input
               type="radio"
               name="mortgageType"

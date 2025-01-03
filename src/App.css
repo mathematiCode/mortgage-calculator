@@ -39,6 +39,7 @@ button {
   display: flex;
   gap: 10px;
   align-items: center;
+  cursor: pointer;
 }
 
 input[type='number'] {
@@ -81,15 +82,20 @@ fieldset {
   gap: 15px;
 }
 
-fieldset > label {
+.mortgage-type {
   border: solid black 2px;
   width: 100%;
   border-radius: 5px;
   padding-block: 7px;
   gap: 10px;
+  cursor: pointer;
 }
 
-.selected-mortgage-type {
+.mortgage-type:hover {
+  border: solid var(--lime-500) 2px;
+}
+
+mortgage-type[data='selected'] {
   background-color: var(--lime-100);
   accent-color: var(--lime-500);
   border: solid var(--lime-500) 2px;
@@ -133,4 +139,12 @@ h3 {
   color: var(--white);
   font-weight: 800;
   font-size: 1.5rem;
+}
+
+.incomplete-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

@@ -50,7 +50,8 @@ button {
   cursor: pointer;
 }
 
-input[type='number'] {
+input[type='number'],
+select {
   font-size: 1.3rem;
   padding-block: 8px;
   font-weight: 600;
@@ -117,6 +118,10 @@ fieldset {
   padding: 8px;
   padding-inline: 20px;
   width: fit-content;
+}
+
+.submit-button:hover {
+  background-color: var(--lime-100);
 }
 
 .output-container {

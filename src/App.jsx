@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import CompletedResults from './components/CompletedResults';
 import IncompleteResults from './components/IncompleteResults';
+import { mortgageCalculator } from '@jdizm/finance-calculator';
 
 function App() {
   const [status, setStatus] = useState('empty');
@@ -10,6 +11,25 @@ function App() {
   const [interestRate, setInterestRate] = useState('');
   const [mortgageType, setMortgageType] = useState('none');
   const [monthlyRepayment, setMonthlyRepayment] = useState(0);
+
+  function calculateMonthlyPayments(amount, term, interestRate, mortgageType) {
+    const object = mortgageCalculator(
+      {
+        homeValue: amount,
+        deposit: 0,
+        interestRate: interestRate,
+        years: term,
+      },
+      mortgageType
+    );
+    if (mortgageType == 'repayment') {
+      return object.monthlyRepayment;
+    } else if (mortgageType == 'interestOnly') {
+      return object.interestPayments.monthly;
+    } else {
+      throw new Error('This should never happen');
+    }
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,11 +43,9 @@ function App() {
       mortgageType !== 'none'
     ) {
       setStatus('success');
-      if (mortgageType == 'repayment') {
-        setMonthlyRepayment(1000);
-      } else if (mortgageType == 'interest-only') {
-        setMonthlyRepayment(200);
-      } else setMonthlyRepayment(5);
+      setMonthlyRepayment(
+        calculateMonthlyPayments(amount, term, interestRate, mortgageType)
+      );
     } else if (amount < 0 || term < 0 || interestRate < 0) {
       setStatus('error');
     } else if (
@@ -36,16 +54,16 @@ function App() {
       interestRate == undefined ||
       mortgageType == 'none'
     ) {
+      console.log({ amount, term, interestRate, mortgageType });
       setStatus('empty');
     } else {
-      console.log('This should never happen');
+      throw new Error('This should never happen');
     }
-    console.log(status);
   }
 
   function clearAll() {
     setAmount('');
-    setTerm('');
+    setTerm('none');
     setInterestRate('');
     setMortgageType('none');
     setStatus('empty');
@@ -72,12 +90,20 @@ function App() {
         <div className="flex-horizontal">
           <label htmlFor="mortgageTerm" className="label-on-top">
             Mortgage Term
-            <input
-              type="number"
-              id="mortgageTerm"
+            <select
+              id="mortgage-term"
               value={term}
               onChange={event => setTerm(event.target.value)}
-            />
+            >
+              <option value="none">Select Term</option>
+              <optgroup label="term-options">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </optgroup>
+            </select>
           </label>
           <label htmlFor="interestRate" className="label-on-top">
             Interest Rate
@@ -108,16 +134,16 @@ function App() {
             Repayment
           </label>
           <label
-            htmlFor="interest-only"
+            htmlFor="interestOnly"
             className="mortgage-type"
-            data-selected={mortgageType === 'interest-only'}
+            data-selected={mortgageType === 'interestOnly'}
           >
             <input
               type="radio"
               name="mortgageType"
-              id="interest-only"
-              value="interest-only"
-              checked={mortgageType === 'interest-only'}
+              id="interestOnly"
+              value="interestOnly"
+              checked={mortgageType === 'interestOnly'}
               onChange={event => setMortgageType(event.target.value)}
             />
             Interest Only
@@ -130,7 +156,7 @@ function App() {
       </form>
       <div className="output-container">
         {status == 'success' ? (
-          <CompletedResults monthlyRepayment={monthlyRepayment} />
+          <CompletedResults monthlyRepayment={monthlyRepayment} term={term} />
         ) : (
           <IncompleteResults />
         )}

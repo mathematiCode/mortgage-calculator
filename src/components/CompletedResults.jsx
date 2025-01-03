@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-function CompletedResults({ monthlyRepayment }) {
-  const totalRepayment = monthlyRepayment * 12;
+function CompletedResults({ monthlyRepayment, term }) {
+  const totalRepayment = monthlyRepayment * 12 * term;
   return (
     <>
       <h2>Your results</h2>
@@ -11,7 +11,7 @@ function CompletedResults({ monthlyRepayment }) {
       </p>
       <h3>Your monthly repayments </h3>
       <span className="monthly-repayment">${monthlyRepayment.toFixed(2)}</span>
-      <h3>Total you'll repay over the term </h3>
+      <h3>Total you will repay over the term </h3>
       <span className="total-repayment">${totalRepayment.toFixed(2)}</span>
     </>
   );

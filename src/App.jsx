@@ -13,21 +13,41 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('amount is', amount);
-    console.log('term is', term);
     if (amount > 0 && term > 0) {
       setMonthlyRepayment(amount / term / 12);
     }
-    if (amount > 0 && term > 0 && interestRate >= 0 && mortgageType) {
+    if (
+      amount > 0 &&
+      term > 0 &&
+      interestRate >= 0 &&
+      mortgageType !== 'none'
+    ) {
       setStatus('success');
       if (mortgageType == 'repayment') {
         setMonthlyRepayment(1000);
       } else if (mortgageType == 'interest-only') {
         setMonthlyRepayment(200);
       } else setMonthlyRepayment(5);
-    } else if (amount < 0 || term < 0 || interestRate < 0 || mortgageType) {
-      setStatus('inProgress');
+    } else if (amount < 0 || term < 0 || interestRate < 0) {
+      setStatus('error');
+    } else if (
+      amount == undefined ||
+      term == undefined ||
+      interestRate == undefined ||
+      mortgageType == 'none'
+    ) {
+      setStatus('empty');
+    } else {
+      console.log('This should never happen');
     }
+    console.log(status);
+  }
+
+  function clearAll() {
+    setAmount('');
+    setTerm('');
+    setInterestRate('');
+    setMortgageType('none');
   }
 
   return (
@@ -35,7 +55,9 @@ function App() {
       <form onSubmit={event => handleSubmit(event)}>
         <div className="title-and-button">
           <h1>Mortgage Calculator</h1>
-          <button className="clear-button">Clear All</button>
+          <button className="clear-button" type="reset" onClick={clearAll}>
+            Clear All
+          </button>
         </div>
         <label htmlFor="mortgageAmount" className="label-on-top">
           Mortgage Amount
@@ -92,7 +114,7 @@ function App() {
             Interest Only
           </label>
         </fieldset>
-        <button className="submit-button">
+        <button type="submit" className="submit-button">
           <img src="./assets/images/icon-calculator.svg" />
           Calculate Repayments
         </button>

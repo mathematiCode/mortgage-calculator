@@ -48,6 +48,7 @@ function App() {
     setTerm('');
     setInterestRate('');
     setMortgageType('none');
+    setStatus('empty');
   }
 
   return (

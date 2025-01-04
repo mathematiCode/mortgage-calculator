@@ -30,6 +30,36 @@ form > * {
   width: 100%;
 }
 
+.front-unit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background-color: var(--secondary-100);
+  width: 60px;
+  border: solid var(--secondary-700) 2px;
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.back-unit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background-color: var(--secondary-100);
+  width: 60px;
+  border: solid var(--secondary-700) 2px;
+  border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#years-unit {
+  width: 100px;
+}
+
 .clear-button {
   background-color: transparent;
   border: none;
@@ -55,6 +85,35 @@ select {
   font-size: 1.3rem;
   padding-block: 8px;
   font-weight: 600;
+  width: 100%;
+  border: solid var(--secondary-700) 2px;
+  border-radius: 5px;
+}
+
+select[value='none'] {
+  font-size: 0.9rem;
+}
+
+.amount-container,
+.interest-container,
+.term-container {
+  width: 100%;
+  display: flex;
+}
+
+.amount-container > input {
+  width: 100%;
+  padding-left: 25px;
+  border-left: none;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.interest-container > input {
+  width: 100%;
+  border-right: none;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 h1 {
@@ -73,8 +132,12 @@ h1 {
   width: 100%;
 }
 
-.flex-horizontal > * {
-  width: 48%;
+.flex-horizontal > *:first-child {
+  width: 60%;
+}
+
+.flex-horizontal > *:last-child {
+  width: 40%;
 }
 
 .title-and-button {
@@ -92,7 +155,7 @@ fieldset {
 }
 
 .mortgage-type {
-  border: solid black 2px;
+  border: solid var(--secondary-700) 2px;
   width: 100%;
   border-radius: 5px;
   padding-block: 7px;

@@ -109,7 +109,8 @@ select[value='none'] {
   border-bottom-left-radius: 0px;
 }
 
-.interest-container > input {
+.interest-container > input,
+select {
   width: 100%;
   border-right: none;
   border-top-right-radius: 0px;

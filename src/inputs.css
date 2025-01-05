@@ -28,7 +28,7 @@ select[value='none'] {
 }
 
 .interest-container > input,
-select {
+#mortgage-term {
   width: 100%;
   border-right: none;
   border-top-right-radius: 0px;

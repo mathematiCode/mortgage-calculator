@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-function AmountInput({ amount, setAmount, status, setStatus }) {
+function AmountInput({ amount, setAmount, status, setStatus, currency }) {
   function handleInput(event) {
     if (event.target.value >= 0 && event.target.value < 100000000000) {
       setStatus('normal');
@@ -15,7 +15,7 @@ function AmountInput({ amount, setAmount, status, setStatus }) {
     <label htmlFor="mortgageAmount" className="label-on-top">
       Mortgage Amount
       <div className="amount-container" data-status={status}>
-        <div className="front-unit">$</div>
+        <div className="front-unit">{currency}</div>
         <input
           type="number"
           id="mortgageAmount"

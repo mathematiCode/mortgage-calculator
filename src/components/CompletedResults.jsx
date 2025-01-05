@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { FormatMoney } from 'format-money-js';
 
-function CompletedResults({ monthlyRepayment, term }) {
+function CompletedResults({ monthlyRepayment, term, currency }) {
   const fm = new FormatMoney({
     decimals: 2,
-    symbol: '$',
+    symbol: currency,
   });
 
   const totalRepayment = fm.from(monthlyRepayment * 12 * term);

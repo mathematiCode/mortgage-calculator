@@ -12,6 +12,7 @@ import IncompleteResults from './components/IncompleteResults';
 import { mortgageCalculator } from '@jdizm/finance-calculator';
 
 function App() {
+  const [currency, setCurrency] = useState('$');
   const [status, setStatus] = useState('empty');
   const [amount, setAmount] = useState('');
   const [amountStatus, setAmountStatus] = useState('normal');
@@ -101,59 +102,76 @@ function App() {
   }
 
   return (
-    <div className="main">
-      <form onSubmit={handleSubmit}>
-        <div className="title-and-button">
-          <h1>Mortgage Calculator</h1>
-          <button className="clear-button" type="reset" onClick={clearAll}>
-            Clear All
-          </button>
-        </div>
-        <AmountInput
-          amount={amount}
-          setAmount={setAmount}
-          status={amountStatus}
-          setStatus={setAmountStatus}
-        ></AmountInput>
+    <>
+      <select
+        id="select-currency"
+        value={currency}
+        onChange={event => setCurrency(event.target.value)}
+      >
+        <option value="$">$</option>
+        <option value="€">€</option>
+        <option value="¥">¥</option>
+        <option value="£">£</option>
+      </select>
+      <div className="main">
+        <form onSubmit={handleSubmit}>
+          <div className="title-and-button">
+            <h1>Mortgage Calculator</h1>
+            <button className="clear-button" type="reset" onClick={clearAll}>
+              Clear All
+            </button>
+          </div>
+          <AmountInput
+            amount={amount}
+            setAmount={setAmount}
+            status={amountStatus}
+            setStatus={setAmountStatus}
+            currency={currency}
+          ></AmountInput>
 
-        <div className="flex-horizontal">
-          <TermInput
-            term={term}
-            setTerm={setTerm}
-            status={termStatus}
-            setStatus={setTermStatus}
-            initialTermIsDisabled={initialTermIsDisabled}
-            setInitialTermIsDisabled={setInitialTermIsDisabled}
-          ></TermInput>
+          <div className="flex-horizontal">
+            <TermInput
+              term={term}
+              setTerm={setTerm}
+              status={termStatus}
+              setStatus={setTermStatus}
+              initialTermIsDisabled={initialTermIsDisabled}
+              setInitialTermIsDisabled={setInitialTermIsDisabled}
+            ></TermInput>
 
-          <InterestInput
-            interestRate={interestRate}
-            setInterestRate={setInterestRate}
-            status={interestStatus}
-            setStatus={setInterestStatus}
+            <InterestInput
+              interestRate={interestRate}
+              setInterestRate={setInterestRate}
+              status={interestStatus}
+              setStatus={setInterestStatus}
+            />
+          </div>
+
+          <MortgageTypeInput
+            mortgageType={mortgageType}
+            setMortgageType={setMortgageType}
+            status={mortgageTypeStatus}
+            setStatus={setMortgageTypeStatus}
           />
+
+          <button type="submit" className="submit-button">
+            <img src="./assets/images/icon-calculator.svg" />
+            Calculate Repayments
+          </button>
+        </form>
+        <div className="output-container">
+          {status == 'success' ? (
+            <CompletedResults
+              monthlyRepayment={monthlyRepayment}
+              term={term}
+              currency={currency}
+            />
+          ) : (
+            <IncompleteResults />
+          )}
         </div>
-
-        <MortgageTypeInput
-          mortgageType={mortgageType}
-          setMortgageType={setMortgageType}
-          status={mortgageTypeStatus}
-          setStatus={setMortgageTypeStatus}
-        />
-
-        <button type="submit" className="submit-button">
-          <img src="./assets/images/icon-calculator.svg" />
-          Calculate Repayments
-        </button>
-      </form>
-      <div className="output-container">
-        {status == 'success' ? (
-          <CompletedResults monthlyRepayment={monthlyRepayment} term={term} />
-        ) : (
-          <IncompleteResults />
-        )}
       </div>
-    </div>
+    </>
   );
 }
 

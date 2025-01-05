@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import './form.css';
 import './inputs.css';
@@ -17,11 +17,25 @@ function App() {
   const [amountStatus, setAmountStatus] = useState('normal');
   const [term, setTerm] = useState('none');
   const [termStatus, setTermStatus] = useState('normal');
+  const [initialTermIsDisabled, setInitialTermIsDisabled] = useState(true);
   const [interestRate, setInterestRate] = useState('');
   const [interestStatus, setInterestStatus] = useState('normal');
   const [mortgageType, setMortgageType] = useState('none');
   const [mortgageTypeStatus, setMortgageTypeStatus] = useState('normal');
   const [monthlyRepayment, setMonthlyRepayment] = useState(0);
+  const [formHasBeenSubmitted, setFormHasBeenSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (
+      amount > 0 &&
+      term > 0 &&
+      interestRate >= 0 &&
+      mortgageType !== 'none' &&
+      formHasBeenSubmitted == true
+    ) {
+      handleSubmit();
+    }
+  }, [amount, term, interestRate, mortgageType]);
 
   function calculateMonthlyPayments(amount, term, interestRate, mortgageType) {
     const object = mortgageCalculator(
@@ -43,7 +57,10 @@ function App() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+      setFormHasBeenSubmitted(true);
+    }
     if (
       amount > 0 &&
       term > 0 &&
@@ -79,11 +96,13 @@ function App() {
     setInterestRate('');
     setMortgageType('none');
     setStatus('empty');
+    setFormHasBeenSubmitted(false);
+    setInitialTermIsDisabled(false);
   }
 
   return (
     <div className="main">
-      <form onSubmit={event => handleSubmit(event)}>
+      <form onSubmit={handleSubmit}>
         <div className="title-and-button">
           <h1>Mortgage Calculator</h1>
           <button className="clear-button" type="reset" onClick={clearAll}>
@@ -103,6 +122,8 @@ function App() {
             setTerm={setTerm}
             status={termStatus}
             setStatus={setTermStatus}
+            initialTermIsDisabled={initialTermIsDisabled}
+            setInitialTermIsDisabled={setInitialTermIsDisabled}
           ></TermInput>
 
           <InterestInput

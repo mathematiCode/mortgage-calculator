@@ -1,10 +1,18 @@
 /* eslint-disable react/prop-types */
 
-function TermInput({ term, setTerm, status, setStatus }) {
+function TermInput({
+  term,
+  setTerm,
+  status,
+  setStatus,
+  initialTermIsDisabled,
+  setInitialTermIsDisabled,
+}) {
   function handleInput(event) {
     if (event.target.value !== 'none') {
       setTerm(event.target.value);
       setStatus('normal');
+      setInitialTermIsDisabled(true);
     } else {
       setStatus('error');
       throw new Error('This should never happen');
@@ -19,7 +27,7 @@ function TermInput({ term, setTerm, status, setStatus }) {
           value={term}
           onChange={event => handleInput(event)}
         >
-          <option value="none" disabled={true}>
+          <option value="none" disabled={initialTermIsDisabled}>
             Select Term
           </option>
           <optgroup label="term-options">

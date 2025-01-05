@@ -2,6 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import CompletedResults from './components/CompletedResults';
 import IncompleteResults from './components/IncompleteResults';
+import AmountInput from './components/AmountInput';
+import TermInput from './components/TermInput';
+import InterestInput from './components/InterestInput';
 import { mortgageCalculator } from '@jdizm/finance-calculator';
 
 function App() {
@@ -85,54 +88,15 @@ function App() {
             Clear All
           </button>
         </div>
-        <label htmlFor="mortgageAmount" className="label-on-top">
-          Mortgage Amount
-          <div className="amount-container">
-            <div className="front-unit">$</div>
-            <input
-              type="number"
-              id="mortgageAmount"
-              value={amount}
-              onChange={event => setAmount(event.target.value)}
-            />
-          </div>
-        </label>
+        <AmountInput amount={amount} setAmount={setAmount}></AmountInput>
 
         <div className="flex-horizontal">
-          <label htmlFor="mortgage-term" className="label-on-top">
-            Mortgage Term
-            <div className="term-container">
-              <select
-                id="mortgage-term"
-                value={term}
-                onChange={event => setTerm(event.target.value)}
-              >
-                <option value="none">Select Term</option>
-                <optgroup label="term-options">
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
-                  <option value="30">30</option>
-                </optgroup>
-              </select>
-              <div id="years-unit" className="back-unit">
-                years
-              </div>
-            </div>
-          </label>
-          <label htmlFor="interestRate" className="label-on-top">
-            Interest Rate
-            <div className="interest-container">
-              <input
-                type="number"
-                id="interestRate"
-                value={interestRate}
-                onChange={event => setInterestRate(event.target.value)}
-              />
-              <div className="back-unit">%</div>
-            </div>
-          </label>
+          <TermInput term={term} setTerm={setTerm}></TermInput>
+
+          <InterestInput
+            interestRate={interestRate}
+            setInterestRate={setInterestRate}
+          />
         </div>
 
         <fieldset>

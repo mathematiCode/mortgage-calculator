@@ -18,6 +18,15 @@
   text-align: left;
 }
 
+@media (max-width: 900px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -84,6 +93,7 @@ input[type='number'],
 select {
   font-size: 1.3rem;
   padding-block: 8px;
+  padding-inline: 4px;
   font-weight: 600;
   width: 100%;
   border: solid var(--secondary-700) 2px;
@@ -103,10 +113,23 @@ select[value='none'] {
 
 .amount-container > input {
   width: 100%;
-  padding-left: 25px;
   border-left: none;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+}
+
+.amount-container:focus-within > input,
+.interest-container:focus-within > input,
+.term-container:focus-within > select {
+  outline: none;
+  border: solid var(--lime-500) 2px;
+}
+
+.amount-container:focus-within > div,
+.interest-container:focus-within > div,
+.term-container:focus-within > div {
+  background-color: var(--lime-500);
+  border: solid var(--lime-500) 2px;
 }
 
 .interest-container > input,
@@ -197,7 +220,6 @@ fieldset {
   border-radius: 30px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 70px;
-  width: 100%;
   flex-grow: 1;
   color: var(--white);
 }

@@ -1,6 +1,15 @@
 /* eslint-disable react/prop-types */
+import { FormatMoney } from 'format-money-js';
+
 function CompletedResults({ monthlyRepayment, term }) {
-  const totalRepayment = monthlyRepayment * 12 * term;
+  const fm = new FormatMoney({
+    decimals: 2,
+    symbol: '$',
+  });
+
+  const totalRepayment = fm.from(monthlyRepayment * 12 * term);
+  const formattedMonthlyPayment = fm.from(monthlyRepayment);
+
   return (
     <>
       <h2>Your results</h2>
@@ -10,9 +19,9 @@ function CompletedResults({ monthlyRepayment, term }) {
         again.
       </p>
       <h3>Your monthly repayments </h3>
-      <span className="monthly-repayment">${monthlyRepayment.toFixed(2)}</span>
+      <span className="monthly-repayment">{formattedMonthlyPayment}</span>
       <h3>Total you will repay over the term </h3>
-      <span className="total-repayment">${totalRepayment.toFixed(2)}</span>
+      <span className="total-repayment">{totalRepayment}</span>
     </>
   );
 }

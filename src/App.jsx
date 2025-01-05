@@ -2,18 +2,22 @@ import { useState } from 'react';
 import './App.css';
 import './form.css';
 import './inputs.css';
-import CompletedResults from './components/CompletedResults';
-import IncompleteResults from './components/IncompleteResults';
+
 import AmountInput from './components/AmountInput';
 import TermInput from './components/TermInput';
 import InterestInput from './components/InterestInput';
+import CompletedResults from './components/CompletedResults';
+import IncompleteResults from './components/IncompleteResults';
 import { mortgageCalculator } from '@jdizm/finance-calculator';
 
 function App() {
   const [status, setStatus] = useState('empty');
   const [amount, setAmount] = useState('');
+  const [amountStatus, setAmountStatus] = useState('normal');
   const [term, setTerm] = useState('none');
+  const [termStatus, setTermStatus] = useState('normal');
   const [interestRate, setInterestRate] = useState('');
+  const [interestStatus, setInterestStatus] = useState('normal');
   const [mortgageType, setMortgageType] = useState('none');
   const [monthlyRepayment, setMonthlyRepayment] = useState(0);
 
@@ -32,14 +36,25 @@ function App() {
     } else if (mortgageType == 'interestOnly') {
       return object.interestPayments.monthly;
     } else {
+      console.log('mortgageType', mortgageType);
       throw new Error('This should never happen');
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (amount > 0 && term > 0) {
-      setMonthlyRepayment(amount / term / 12);
+
+    if (amount < 0 || amount == '') {
+      setStatus('error');
+      setAmountStatus('error');
+    }
+    if (term < 0 || term == 'none') {
+      setStatus('error');
+      setTermStatus('error');
+    }
+    if (interestRate <= 0 || interestRate == '' || interestRate > 100) {
+      setStatus('error');
+      setInterestStatus('error');
     }
     if (
       amount > 0 &&
@@ -51,26 +66,7 @@ function App() {
       setMonthlyRepayment(
         calculateMonthlyPayments(amount, term, interestRate, mortgageType)
       );
-    } else if (amount < 0 || term < 0 || interestRate < 0) {
-      setStatus('error');
-    } else if (
-      amount == undefined &&
-      term == 'none' &&
-      interestRate == undefined &&
-      mortgageType == 'none'
-    ) {
-      setStatus('empty');
-    } else if (
-      amount == undefined ||
-      term == 'none' ||
-      interestRate == undefined ||
-      mortgageType == 'none'
-    ) {
-      setStatus('inprogress');
-    } else {
-      throw new Error('This should never happen');
     }
-    console.log('status', status);
   }
 
   function clearAll() {
@@ -90,14 +86,26 @@ function App() {
             Clear All
           </button>
         </div>
-        <AmountInput amount={amount} setAmount={setAmount}></AmountInput>
+        <AmountInput
+          amount={amount}
+          setAmount={setAmount}
+          status={amountStatus}
+          setStatus={setAmountStatus}
+        ></AmountInput>
 
         <div className="flex-horizontal">
-          <TermInput term={term} setTerm={setTerm}></TermInput>
+          <TermInput
+            term={term}
+            setTerm={setTerm}
+            status={termStatus}
+            setStatus={setTermStatus}
+          ></TermInput>
 
           <InterestInput
             interestRate={interestRate}
             setInterestRate={setInterestRate}
+            status={interestStatus}
+            setStatus={setInterestStatus}
           />
         </div>
 

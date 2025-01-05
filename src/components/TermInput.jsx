@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from 'react';
-function TermInput({ term, setTerm }) {
-  const [status, setStatus] = useState('normal');
-
+function TermInput({ term, setTerm, status, setStatus }) {
   function handleInput(event) {
     if (event.target.value !== 'none') {
       setTerm(event.target.value);
@@ -23,7 +20,7 @@ function TermInput({ term, setTerm }) {
           onChange={event => handleInput(event)}
           data-status={status}
         >
-          <option value="none" disabled="true">
+          <option value="none" disabled={true}>
             Select Term
           </option>
           <optgroup label="term-options">

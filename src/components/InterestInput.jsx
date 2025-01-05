@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from 'react';
-function InterestInput({ interestRate, setInterestRate }) {
-  const [status, setStatus] = useState('normal');
+function InterestInput({ interestRate, setInterestRate, status, setStatus }) {
   function handleInput(event) {
     if (event.target.value >= 0 && event.target.value <= 100) {
       setInterestRate(event.target.value);

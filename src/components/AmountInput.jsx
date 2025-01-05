@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
 
-function AmountInput({ amount, setAmount }) {
-  const [status, setStatus] = useState('normal');
-
+function AmountInput({ amount, setAmount, status, setStatus }) {
   function handleInput(event) {
     if (event.target.value >= 0 && event.target.value < 100000000000) {
       setStatus('normal');
       setAmount(event.target.value);
     } else {
       setStatus('error');
+      setAmount(event.target.value);
+      console.log(status);
     }
   }
   return (

@@ -58,7 +58,7 @@ select {
 
 .amount-container[data-status='error'] > div,
 .interest-container[data-status='error'] > div,
-.term-container[data-status='error'] {
+.term-container[data-status='error'] > .back-unit {
   background-color: var(--red-600);
   border: solid var(--red-600) 2px;
   color: white;

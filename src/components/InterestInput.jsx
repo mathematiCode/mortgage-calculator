@@ -2,8 +2,10 @@
 
 function InterestInput({ interestRate, setInterestRate, status, setStatus }) {
   function handleInput(event) {
-    if (event.target.value >= 0 && event.target.value <= 100) {
+    if (event.target.value >= 0 && event.target.value < 100) {
       setInterestRate(event.target.value);
+      setStatus('normal');
+    } else if (event.target.value >= 100) {
       setStatus('normal');
     } else {
       setStatus('error');
@@ -22,6 +24,7 @@ function InterestInput({ interestRate, setInterestRate, status, setStatus }) {
         />
         <div className="back-unit">%</div>
       </div>
+      {status == 'error' && <p className="error">This field is required.</p>}
     </label>
   );
 }

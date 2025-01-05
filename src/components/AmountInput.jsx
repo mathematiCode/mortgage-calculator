@@ -23,6 +23,7 @@ function AmountInput({ amount, setAmount, status, setStatus }) {
           onChange={event => handleInput(event)}
         />
       </div>
+      {status == 'error' && <p className="error">This field is required.</p>}
     </label>
   );
 }

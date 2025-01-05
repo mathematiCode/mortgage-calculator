@@ -6,6 +6,7 @@ import './inputs.css';
 import AmountInput from './components/AmountInput';
 import TermInput from './components/TermInput';
 import InterestInput from './components/InterestInput';
+import MortgageTypeInput from './components/MortgageTypeInput';
 import CompletedResults from './components/CompletedResults';
 import IncompleteResults from './components/IncompleteResults';
 import { mortgageCalculator } from '@jdizm/finance-calculator';
@@ -19,6 +20,7 @@ function App() {
   const [interestRate, setInterestRate] = useState('');
   const [interestStatus, setInterestStatus] = useState('normal');
   const [mortgageType, setMortgageType] = useState('none');
+  const [mortgageTypeStatus, setMortgageTypeStatus] = useState('normal');
   const [monthlyRepayment, setMonthlyRepayment] = useState(0);
 
   function calculateMonthlyPayments(amount, term, interestRate, mortgageType) {
@@ -36,26 +38,12 @@ function App() {
     } else if (mortgageType == 'interestOnly') {
       return object.interestPayments.monthly;
     } else {
-      console.log('mortgageType', mortgageType);
       throw new Error('This should never happen');
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (amount < 0 || amount == '') {
-      setStatus('error');
-      setAmountStatus('error');
-    }
-    if (term < 0 || term == 'none') {
-      setStatus('error');
-      setTermStatus('error');
-    }
-    if (interestRate <= 0 || interestRate == '' || interestRate > 100) {
-      setStatus('error');
-      setInterestStatus('error');
-    }
     if (
       amount > 0 &&
       term > 0 &&
@@ -66,6 +54,22 @@ function App() {
       setMonthlyRepayment(
         calculateMonthlyPayments(amount, term, interestRate, mortgageType)
       );
+    }
+    if (amount < 0 || amount == '') {
+      setStatus('error');
+      setAmountStatus('error');
+    }
+    if (term < 0 || term == 'none') {
+      setStatus('error');
+      setTermStatus('error');
+    }
+    if (mortgageType == 'none') {
+      setStatus('error');
+      setMortgageTypeStatus('error');
+    }
+    if (interestRate <= 0 || interestRate == '' || interestRate > 100) {
+      setStatus('error');
+      setInterestStatus('error');
     }
   }
 
@@ -109,39 +113,13 @@ function App() {
           />
         </div>
 
-        <fieldset>
-          <legend>Mortgage Type </legend>
-          <label
-            htmlFor="repayment"
-            className="mortgage-type"
-            data-selected={mortgageType === 'repayment'}
-          >
-            <input
-              type="radio"
-              name="mortgageType"
-              id="repayment"
-              value={'repayment'}
-              checked={mortgageType === 'repayment'}
-              onChange={event => setMortgageType(event.target.value)}
-            />
-            Repayment
-          </label>
-          <label
-            htmlFor="interestOnly"
-            className="mortgage-type"
-            data-selected={mortgageType === 'interestOnly'}
-          >
-            <input
-              type="radio"
-              name="mortgageType"
-              id="interestOnly"
-              value="interestOnly"
-              checked={mortgageType === 'interestOnly'}
-              onChange={event => setMortgageType(event.target.value)}
-            />
-            Interest Only
-          </label>
-        </fieldset>
+        <MortgageTypeInput
+          mortgageType={mortgageType}
+          setMortgageType={setMortgageType}
+          status={mortgageTypeStatus}
+          setStatus={setMortgageTypeStatus}
+        />
+
         <button type="submit" className="submit-button">
           <img src="./assets/images/icon-calculator.svg" />
           Calculate Repayments

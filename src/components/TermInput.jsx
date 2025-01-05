@@ -13,12 +13,11 @@ function TermInput({ term, setTerm, status, setStatus }) {
   return (
     <label htmlFor="mortgage-term" className="label-on-top">
       Mortgage Term
-      <div className="term-container">
+      <div className="term-container" data-status={status}>
         <select
           id="mortgage-term"
           value={term}
           onChange={event => handleInput(event)}
-          data-status={status}
         >
           <option value="none" disabled={true}>
             Select Term
@@ -36,6 +35,7 @@ function TermInput({ term, setTerm, status, setStatus }) {
           years
         </div>
       </div>
+      {status == 'error' && <p className="error">This field is required.</p>}
     </label>
   );
 }

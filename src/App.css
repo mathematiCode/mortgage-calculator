@@ -27,6 +27,10 @@
     margin-top: 50px;
     border-bottom-left-radius: 70px;
   }
+
+  #root {
+    height: fit-content;
+  }
 }
 
 .output-container {

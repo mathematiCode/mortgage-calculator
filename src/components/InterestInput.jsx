@@ -1,18 +1,26 @@
 /* eslint-disable react/prop-types */
+
+import { useState } from 'react';
 function InterestInput({ interestRate, setInterestRate }) {
+  const [status, setStatus] = useState('normal');
+  function handleInput(event) {
+    if (event.target.value >= 0 && event.target.value <= 100) {
+      setInterestRate(event.target.value);
+      setStatus('normal');
+    } else {
+      setStatus('error');
+    }
+  }
+
   return (
     <label htmlFor="interestRate" className="label-on-top">
       Interest Rate
-      <div className="interest-container">
+      <div className="interest-container" data-status={status}>
         <input
           type="number"
           id="interestRate"
           value={interestRate}
-          onChange={event => {
-            if (event.target.value >= 0 && event.target.value <= 100) {
-              setInterestRate(event.target.value);
-            }
-          }}
+          onChange={event => handleInput(event)}
         />
         <div className="back-unit">%</div>
       </div>

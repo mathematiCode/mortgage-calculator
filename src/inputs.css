@@ -1,0 +1,93 @@
+input[type='number'],
+select {
+  font-size: 1.3rem;
+  padding-block: 8px;
+  padding-inline: 4px;
+  font-weight: 600;
+  width: 100%;
+  border: solid var(--secondary-700) 2px;
+  border-radius: 5px;
+}
+
+select[value='none'] {
+  font-size: 0.9rem;
+}
+
+.amount-container,
+.interest-container,
+.term-container {
+  width: 100%;
+  display: flex;
+}
+
+.amount-container > input {
+  width: 100%;
+  border-left: none;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.interest-container > input,
+select {
+  width: 100%;
+  border-right: none;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.amount-container:focus-within > input,
+.interest-container:focus-within > input,
+.term-container:focus-within > select {
+  outline: none;
+  border: solid var(--lime-500) 2px;
+}
+
+.amount-container:focus-within > div,
+.interest-container:focus-within > div,
+.term-container:focus-within > div {
+  background-color: var(--lime-500);
+  border: solid var(--lime-500) 2px;
+}
+
+.amount-container[data-status='error'] > input,
+.interest-container[data-status='error'] > input,
+.term-container[data-status='error'] > select {
+  outline: none;
+  border: solid var(--red-600) 2px;
+}
+
+.amount-container[data-status='error'] > div,
+.interest-container[data-status='error'] > div,
+.term-container[data-status='error'] {
+  background-color: var(--red-600);
+  border: solid var(--red-600) 2px;
+  color: white;
+}
+
+fieldset {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mortgage-type {
+  border: solid var(--secondary-700) 2px;
+  width: 100%;
+  border-radius: 5px;
+  padding-block: 7px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.mortgage-type:hover {
+  border: solid var(--lime-500) 2px;
+}
+
+.mortgage-type[data-selected='true'] {
+  background-color: var(--lime-100);
+  accent-color: var(--lime-500);
+  border: solid var(--lime-500) 2px;
+}

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './App.css';
+import './form.css';
+import './inputs.css';
 import CompletedResults from './components/CompletedResults';
 import IncompleteResults from './components/IncompleteResults';
 import AmountInput from './components/AmountInput';

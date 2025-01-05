@@ -2,20 +2,20 @@
 import { useState } from 'react';
 
 function AmountInput({ amount, setAmount }) {
-  const [amountStatus, setAmountStatus] = useState('inactive');
+  const [status, setStatus] = useState('normal');
 
   function handleInput(event) {
-    if (1000000000 > event.target.value > 0) {
+    if (event.target.value >= 0 && event.target.value < 100000000000) {
+      setStatus('normal');
       setAmount(event.target.value);
     } else {
-      setAmountStatus('error');
+      setStatus('error');
     }
-    setAmount(event.target.value);
   }
   return (
     <label htmlFor="mortgageAmount" className="label-on-top">
       Mortgage Amount
-      <div className="amount-container" data-status={amountStatus}>
+      <div className="amount-container" data-status={status}>
         <div className="front-unit">$</div>
         <input
           type="number"
